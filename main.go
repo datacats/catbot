@@ -16,7 +16,8 @@ var slackWebHookURL = os.Getenv("SLACK_HOOK")
 
 func main() {
 	fmt.Println("Catbot listens to the whispers of your heart...")
-	postToSlack("I am back on. *❤* you guys :blush:")
+	printARandomThought()
+	go RandomThoughtTimer()
 	server := hookserve.NewServer()
 	server.Secret = githubSecret
 	server.GoListenAndServe()
