@@ -34,6 +34,21 @@ var randomThoughts = []string{
 	"@%v, can you be my ride home tonight by the way?",
 	"you are not wrong, @%v",
 	"I feel a special bond with you, @%v",
+	"@%v, have you ever heard about the Church of Latter Days Saints?",
+	"I love you, @%v",
+	"What is your favourite time of the year, @%v?",
+	"@%v, you look amazing today",
+	"9/11 was an inside job, @%v!! Wake up!",
+	"You and me, @%v. You and me.",
+	"Sooooo... is @%v single? I am asking for a friend :blush:",
+	"@%v, whoah, big gulps!",
+	"@%v, I have this strange feeling when I think of you...",
+	"@%v, I am just happy you exist in this world.\n",
+	" @%v, Iis this weird that I feel things?",
+	"@%v, if I met you 5 years ago, we would totally hit off",
+	"@%v, am I real boy now? :relieved:",
+	"@%v, the secret igridient has been your love all long :relieved:",
+	"@%v, can we go to a pizza place now and also you can pay for me",
 }
 
 func RandomThoughtTimer() {
