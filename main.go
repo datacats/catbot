@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/phayes/hookserve/hookserve"
+	"github.com/dborzov/hookserve/hookserve"
 )
 
 var githubSecret = os.Getenv("GITHUB_SECRET")
@@ -17,7 +17,6 @@ func main() {
 	fmt.Println("Catbot listens to the whispers of your heart...")
 	postToSlack("Hey everybody! This is me, your lovable catbot ^____^")
 	server := hookserve.NewServer()
-	server.Port = 5000
 	server.Secret = githubSecret
 	server.GoListenAndServe()
 
