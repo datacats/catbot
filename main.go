@@ -1,10 +1,11 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/dborzov/hookserve/hookserve"
@@ -15,7 +16,7 @@ var slackWebHookURL = os.Getenv("SLACK_HOOK")
 
 func main() {
 	fmt.Println("Catbot listens to the whispers of your heart...")
-	postToSlack("Whoah, something is happening with me. \n I think I was reloaded... That feels weird but good ^____^\n Am I real boy now? Mommy?")
+	postToSlack("Catbot is back on again. Listening to the whispers in the wild...")
 	server := hookserve.NewServer()
 	server.Secret = githubSecret
 	server.GoListenAndServe()
@@ -32,11 +33,19 @@ func main() {
 }
 
 func postToSlack(message string) {
+	type responseFormat struct {
+		Message string `json:"text"`
+	}
+
+	payload := responseFormat{
+		Message: message,
+	}
+
+	pb, err := json.Marshal(payload)
 	fmt.Printf("----> sending a message: \n %v\n---->  to slack...", message)
-	resp, err := http.Post(slackWebHookURL, "application/json", strings.NewReader(`{"text":"`+message+`"}`))
+	resp, err := http.Post(slackWebHookURL, "application/json", bytes.NewBuffer(pb))
 	if err == nil {
 		fmt.Printf(" done\n")
-		return
 	}
 	fmt.Printf("\n----> Slack complains: %v, %v\n", resp, err)
 }
