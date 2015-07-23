@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/dborzov/hookserve/hookserve"
+	"github.com/dborzov/catbot/hookserve"
 )
 
 var githubSecret = os.Getenv("GITHUB_SECRET")

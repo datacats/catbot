@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/dborzov/hookserve/hookserve"
+	"github.com/dborzov/catbot/hookserve"
 )
 
 var MssgTemplatePullRequest = "%s repo: @%v made a pull request: '%s'! w00t w00t!"
