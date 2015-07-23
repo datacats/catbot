@@ -24,7 +24,8 @@ func main() {
 	for {
 		select {
 		case event := <-server.Events:
-			go postToSlack(`<@` + event.Owner + " " + event.Repo + " " + event.Branch + " " + event.Commit)
+			fmt.Printf("Received event: ", event)
+			go postToSlack(fmtEventMessage(event))
 		default:
 			time.Sleep(100)
 		}
