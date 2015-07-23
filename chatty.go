@@ -65,5 +65,6 @@ func RandomThoughtTimer() {
 }
 
 func printARandomThought() {
+	rand.Seed(time.Now().UTC().UnixNano())
 	postToSlack(fmt.Sprintf(randomThoughts[rand.Intn(len(randomThoughts))], Team[rand.Intn(len(Team))]))
 }
