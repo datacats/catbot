@@ -11,6 +11,11 @@ var MssgTemplatePush = "%v repo: @%v pushed '%v' commit to %v branch"
 var MssgUnsupportedEvent = "%v repo: whoah, there was an event with type \"%s\", I dunno what that means :P"
 
 func fmtEventMessage(ev hookserve.Event) (msg string) {
+	if ev.Type == "ping" {
+		msg += fmt.Sprintf("repo *<%v|%v>* tickles me! I feel special :blush: \n ", ev.Repo.Url, ev.Repo.FullName)
+		msg += fmt.Sprintf("@<%v|%v> set up a webhook for that repo. \n", ev.Sender.Url, ev.Sender.FullName)
+		return
+	}
 	msg = fmt.Sprintf("*<%v|%v>*:*%v* (%v) \n", ev.Repo.Url, ev.Repo.FullName, ev.Branch, niceTypeMessage(ev.Type))
 	for _, commit := range ev.Commits {
 		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, commit.Message)
