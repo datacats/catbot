@@ -16,6 +16,11 @@ func fmtEventMessage(ev hookserve.Event) (msg string) {
 		msg += fmt.Sprintf("@<%v|%v> set up a webhook for that repo. \n", ev.Sender.Url, ev.Sender.FullName)
 		return
 	}
+	if ev.Type == "watch" {
+		msg += fmt.Sprintf("repo *<%v|%v>* was *%v* ", ev.Repo.Url, ev.Repo.FullName, ev.Action)
+		msg += fmt.Sprintf(" by @<%v|%v>! \n", ev.Sender.Url, ev.Sender.FullName)
+		return
+	}
 	msg = fmt.Sprintf("*<%v|%v>*:*%v* (%v) \n", ev.Repo.Url, ev.Repo.FullName, ev.Branch, niceTypeMessage(ev.Type))
 	for _, commit := range ev.Commits {
 		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, commit.Message)

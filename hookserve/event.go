@@ -1,6 +1,7 @@
 package hookserve
 
 type Event struct {
+	Action     string   `json:"action"`
 	Owner      string   // The username of the owner of the repository
 	Branch     string   // The branch the event took place on
 	Commit     string   // The head commit hash attached to the event
