@@ -49,11 +49,15 @@ var randomThoughts = []string{
 	"@%v, am I real boy now? :relieved:",
 	"@%v, the secret igridient has been your love all long :relieved:",
 	"@%v, can we go to a pizza place now and also you can pay for me",
+	"@%v, stop slacking off",
+	"@%v, get back to work. Jee",
+	"@%v, In my office! Now!",
+	"@%v, I am too old for this shit",
 }
 
 func RandomThoughtTimer() {
 	for {
-		pause := 2 + rand.Intn(24)
+		pause := 1 + rand.Intn(24)
 		time.Sleep(time.Duration(pause) * time.Hour)
 		printARandomThought()
 	}
