@@ -13,7 +13,7 @@ var MssgUnsupportedEvent = "%v repo: whoah, there was an event with type \"%s\",
 func fmtEventMessage(ev hookserve.Event) (msg string) {
 	msg = fmt.Sprintf("*<%v|%v>*:*%v* *(%v)* \n", ev.Repo.Url, ev.Repo.FullName, ev.Branch, niceTypeMessage(ev.Type))
 	for _, commit := range ev.Commits {
-		msg += fmt.Sprintf("   *[@%v]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, commit.Message)
+		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, commit.Message)
 	}
 	msg += fmt.Sprintf("The branch is %v \n", ev.Branch)
 	if ev.Sender.FullName != "" {
