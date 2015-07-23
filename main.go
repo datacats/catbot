@@ -32,5 +32,11 @@ func main() {
 }
 
 func postToSlack(message string) {
-	http.Post(slackWebHookURL, "application/json", strings.NewReader(`{"text":"`+message+`"}`))
+	fmt.Printf("----> sending a message: \n %v\n---->  to slack...", message)
+	resp, err := http.Post(slackWebHookURL, "application/json", strings.NewReader(`{"text":"`+message+`"}`))
+	if err == nil {
+		fmt.Printf(" done\n")
+		return
+	}
+	fmt.Printf("\n----> Slack complains: %v, %v\n", resp, err)
 }
