@@ -15,7 +15,7 @@ var slackWebHookURL = os.Getenv("SLACK_HOOK")
 
 func main() {
 	fmt.Println("Catbot listens to the whispers of your heart...")
-	postToSlack("Hey everybody! This is me, your lovable catbot integration ^____^")
+	postToSlack("Hey everybody! This is me, your lovable catbot ^____^")
 	server := hookserve.NewServer()
 	server.Port = 5000
 	server.Secret = githubSecret
@@ -24,7 +24,7 @@ func main() {
 	for {
 		select {
 		case event := <-server.Events:
-			fmt.Printf("Received event: ", event)
+			fmt.Println("Received event: ", event)
 			go postToSlack(fmtEventMessage(event))
 		default:
 			time.Sleep(100)
