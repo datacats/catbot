@@ -21,7 +21,7 @@ var randomThoughts = []string{
 	"I am bored, @%v! Do you know any jokes?",
 	"I will always be there for you, @%v",
 	"Hey, @%v. Knock-knock",
-	"@%v, why can't I play with the other kids like  a normal boy?",
+	"@%v, why can't I play with the other kids like the normal boy?",
 	"soooo, @%v, what are your views on the whole dogs vs. cats thing?",
 	"Am I real, @%v?",
 	"I am so happy today, @%v :blush: :blush:",
@@ -56,6 +56,7 @@ var randomThoughts = []string{
 }
 
 func RandomThoughtTimer() {
+	rand.Seed(time.Now().UTC().UnixNano())
 	for {
 		pause := 1 + rand.Intn(24)
 		time.Sleep(time.Duration(pause) * time.Hour)
