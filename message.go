@@ -25,7 +25,9 @@ func fmtEventMessage(ev hookserve.Event) (msg string) {
 	for _, commit := range ev.Commits {
 		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, commit.Message)
 	}
-	msg += fmt.Sprintf("The branch is %v \n", ev.Branch)
+	if ev.Branch != "" {
+		msg += fmt.Sprintf("The branch is %v \n", ev.Branch)
+	}
 	if ev.Sender.FullName != "" {
 		msg += fmt.Sprintf("Authored by @<%v|%v>. \n", ev.Sender.Url, ev.Sender.FullName)
 	}
