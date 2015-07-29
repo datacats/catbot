@@ -26,8 +26,8 @@ func fmtEventMessage(ev hookserve.Event) (msg string) {
 	for _, commit := range ev.Commits {
 		// escaping msg as documented at https://api.slack.com/docs/formatting
 		commit.Message = strings.Replace(commit.Message, "&", `&amp;`, -1)
-		commit.Message = strings.Replace(commit.Message, ">", `&lt;`, -1)
-		commit.Message = strings.Replace(commit.Message, "<", `&gt;`, -1)
+		commit.Message = strings.Replace(commit.Message, ">", `&gt;`, -1)
+		commit.Message = strings.Replace(commit.Message, "<", `&lt;`, -1)
 		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, commit.Message)
 	}
 	if ev.Branch != "" {
