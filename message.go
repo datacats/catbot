@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/dborzov/catbot/hookserve"
 )
@@ -23,7 +24,9 @@ func fmtEventMessage(ev hookserve.Event) (msg string) {
 	}
 	msg = fmt.Sprintf("*<%v|%v>*:*%v* (%v) \n", ev.Repo.Url, ev.Repo.FullName, ev.Branch, niceTypeMessage(ev.Type))
 	for _, commit := range ev.Commits {
-		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, commit.Message)
+		// escaping # symbol (slack's message syntax is confusing but # has been breaking messages)
+		escapedMsg := strings.Replace(commit.Message, ">", `\>`, -1)
+		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, escapedMsg)
 	}
 	if ev.Branch != "" {
 		msg += fmt.Sprintf("The branch is %v \n", ev.Branch)
