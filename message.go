@@ -24,9 +24,11 @@ func fmtEventMessage(ev hookserve.Event) (msg string) {
 	}
 	msg = fmt.Sprintf("*<%v|%v>*:*%v* (%v) \n", ev.Repo.Url, ev.Repo.FullName, ev.Branch, niceTypeMessage(ev.Type))
 	for _, commit := range ev.Commits {
-		// escaping # symbol (slack's message syntax is confusing but # has been breaking messages)
-		escapedMsg := strings.Replace(commit.Message, ">", `\>`, -1)
-		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, escapedMsg)
+		// escaping msg as documented at https://api.slack.com/docs/formatting
+		commit.Message = strings.Replace(commit.Message, "&", `&amp;`, -1)
+		commit.Message = strings.Replace(commit.Message, ">", `&lt;`, -1)
+		commit.Message = strings.Replace(commit.Message, "<", `&gt;`, -1)
+		msg += fmt.Sprintf("   *[<%v|%v>]* <%v|%v>\n", commit.Url, commit.Author.Username, commit.Url, commit.Message)
 	}
 	if ev.Branch != "" {
 		msg += fmt.Sprintf("The branch is %v \n", ev.Branch)
