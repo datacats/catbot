@@ -25,7 +25,7 @@ var randomThoughts = []string{
 	"soooo, @%v, what are your views on the whole dogs vs. cats thing?",
 	"Am I real, @%v?",
 	"I am so happy today, @%v :blush: :blush:",
-	"@%v, could you look into my <https://github.com/dborzov/catbot|code>? I feel itchy today",
+	"@%v, could you look into my <https://www.youtube.com/watch?v=dQw4w9WgXcQ|code>? I feel itchy today",
 	"@%v, who is your favourite Beatles?",
 	"@%v, I want to have opinions about all those expensive French wines some day",
 	"@%v, have you ever thought about turning off the TV, sitting down with your children, and hitting them?",
@@ -78,5 +78,10 @@ func RandomThoughtTimer() {
 
 func printARandomThought() {
 	rand.Seed(time.Now().UTC().UnixNano())
-	postToSlack(fmt.Sprintf(randomThoughts[rand.Intn(len(randomThoughts))], Team[rand.Intn(len(Team))]))
+	userref := makeSlackUserLink(Team[rand.Intn(len(Team))])
+	postToSlack(fmt.Sprintf(randomThoughts[rand.Intn(len(randomThoughts))], userref))
+}
+
+func makeSlackUserLink(username string) string {
+	return fmt.Sprintf("<@%v|%v>", username, username)
 }
