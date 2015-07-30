@@ -50,3 +50,7 @@ func niceTypeMessage(msgType string) string {
 	}
 	return "Event with status'" + msgType + "' happened"
 }
+
+func slackLink(title, href string) string {
+	return fmt.Sprintf("<%v|%v>", href, title)
+}
