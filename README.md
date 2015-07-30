@@ -33,4 +33,4 @@ Now add Github Webhooks to the repos you want using the port `http://catbotServe
 You are all set!
 
 ### Credits
-`catbot` has been forged at [datacats](datacats.com), provider of open data portal solutions that ♥ open source.
+`catbot` has been forged at [datacats](https://datacats.com/), a provider of open data portal solutions that ♥ open source.
